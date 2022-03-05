@@ -105,6 +105,7 @@ export function useDOMTitle(title: string) {
         }
         removeTitleFromActiveTitles(titleIndex);
         setTitleIndex(-1);
+        mountedTitle.current = "";
       }
     },
     [title, setTitleIndex]
