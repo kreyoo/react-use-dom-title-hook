@@ -2,7 +2,7 @@
 	"name": "react-use-dom-title-hook",
 	"version": "1.0.1",
 	"description": "A react hook for handling DOM titles in nested components.",
-	"repository": "https://github.com/kreyoo/react-dom-title-hook",
+	"repository": "https://github.com/kreyoo/react-use-dom-title-hook",
 	"main": "lib/use-dom-title.js",
 	"author": "Jan Vollmer <zunder325@gmail.com>",
 	"license": "MIT",
