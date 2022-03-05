@@ -3,7 +3,7 @@
 	"version": "1.0.1",
 	"description": "A react hook for handling DOM titles in nested components.",
 	"repository": "https://github.com/kreyoo/react-dom-title-hook",
-	"main": "use-dom-title.ts",
+	"main": "lib/use-dom-title.js",
 	"author": "Jan Vollmer <zunder325@gmail.com>",
 	"license": "MIT",
 	"private": false,
@@ -17,5 +17,11 @@
 		"react-test-renderer": "^17.0.2",
 		"ts-jest": "^27.1.3",
 		"typescript": "^4.6.2"
+	},
+	"files": [
+		"lib/**/*"
+	],
+	"scripts": {
+		"prepublish": "tsc"
 	}
 }
