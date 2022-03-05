@@ -73,7 +73,7 @@ function addTitleToActiveTitles(title: string, titleIndex: number): number {
 	return activeTitlesStack.length - 1;
 }
 
-export default function useDOMTitle(title: string) {
+export function useDOMTitle(title: string) {
 	const [titleIndex, setTitleIndex] = useState(-1);
 
 	const mountedTitle = useRef<string>("");
@@ -122,6 +122,18 @@ export default function useDOMTitle(title: string) {
 			mountedTitle.current = newTitle;
 
 			document.title = newTitle;
+		} else if (
+			!title.trim() &&
+			titleIndex >= 0 &&
+			title.trim() !== mountedTitle.current
+		) {
+			if (document.title === mountedTitle.current) {
+				document.title = activeTitlesStack[titleIndex].titleBeforeMount;
+			}
+			removeTitleFromActiveTitles(titleIndex);
+			setTitleIndex(-1);
 		}
 	}, [title]);
 }
+
+export default useDOMTitle;
