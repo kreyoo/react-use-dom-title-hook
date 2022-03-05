@@ -23,12 +23,12 @@ Coming soon...
 ## Code example
 
 ```typescript
-import useDOMTitle from "react-use-dom-title";
+import useDOMTitle from "react-use-dom-title-hook";
 
 function MyLoadingComponent() {
-	useDOMTitle("Loading...");
+  useDOMTitle("Loading...");
 
-	return <Loader />;
+  return <Loader />;
 }
 ```
 
@@ -36,4 +36,4 @@ function MyLoadingComponent() {
 
 ### useDOMTitle
 
-`useDOMTitle(title: string)`
+`useDOMTitle(title: string): void`
