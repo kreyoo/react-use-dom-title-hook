@@ -141,11 +141,9 @@ export function useDOMTitle(title: string) {
   }, [titleIndex]);
 
   useMemo(() => {
-    if (firstRender) {
-      refreshTitle(title);
-      setFirstRender(false);
-    }
-  }, [title]);
+    refreshTitle(title);
+    setFirstRender(false);
+  }, []);
 
   useEffect(() => {
     if (!firstRender) {
