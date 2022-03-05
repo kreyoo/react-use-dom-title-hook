@@ -1,139 +1,156 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 // Metadata for active titles
 const activeTitlesStack: {
-	titleBeforeMount: string;
-	count: number;
-	title: string;
+  titleBeforeMount: string;
+  count: number;
+  title: string;
 }[] = [];
 
 interface activeTitlesStackUpdated {
-	decremented: number[];
+  decremented: number[];
 }
 
 type activeTitlesStackUpdatedEvent = CustomEventInit<activeTitlesStackUpdated>;
 
 function removeTitleFromActiveTitles(titleIndex: number): number {
-	const { count, titleBeforeMount } = activeTitlesStack[titleIndex];
-	if (count > 1) {
-		activeTitlesStack[titleIndex].count -= 1;
-	} else {
-		// If our title is not the last in order, we pass our titleBeforeMount to the next title
-		if (titleIndex !== activeTitlesStack.length - 1)
-			activeTitlesStack[titleIndex + 1].titleBeforeMount = titleBeforeMount;
+  const { count, titleBeforeMount } = activeTitlesStack[titleIndex];
+  if (count > 1) {
+    activeTitlesStack[titleIndex].count -= 1;
+  } else {
+    // If our title is not the last in order, we pass our titleBeforeMount to the next title
+    if (titleIndex !== activeTitlesStack.length - 1)
+      activeTitlesStack[titleIndex + 1].titleBeforeMount = titleBeforeMount;
 
-		activeTitlesStack.splice(titleIndex, 1);
-		const activeTitlesStackUpdated = new CustomEvent<activeTitlesStackUpdated>(
-			"activeTitlesStackUpdated",
-			{
-				detail: {
-					decremented: [...Array(activeTitlesStack.length + 1).keys()].filter(
-						(index: number) => index > titleIndex
-					),
-				},
-			}
-		);
-		document.dispatchEvent(activeTitlesStackUpdated);
-	}
-	return -1;
+    activeTitlesStack.splice(titleIndex, 1);
+    const activeTitlesStackUpdated = new CustomEvent<activeTitlesStackUpdated>(
+      "activeTitlesStackUpdated",
+      {
+        detail: {
+          decremented: [...Array(activeTitlesStack.length + 1).keys()].filter(
+            (index: number) => index > titleIndex
+          ),
+        },
+      }
+    );
+    document.dispatchEvent(activeTitlesStackUpdated);
+  }
+  return -1;
 }
 
 function addTitleToActiveTitles(title: string, titleIndex: number): number {
-	if (
-		activeTitlesStack.length &&
-		titleIndex >= 0 &&
-		activeTitlesStack[titleIndex].title !== title
-	) {
-		removeTitleFromActiveTitles(titleIndex);
-		if (activeTitlesStack[activeTitlesStack.length - 1].title === title) {
-			activeTitlesStack[activeTitlesStack.length - 1].count++;
-		} else {
-			activeTitlesStack.push({
-				title: title,
-				titleBeforeMount: document.title,
-				count: 1,
-			});
-		}
-	} else {
-		if (
-			(activeTitlesStack.length &&
-				activeTitlesStack[activeTitlesStack.length - 1].title !== title) ||
-			!activeTitlesStack.length
-		) {
-			activeTitlesStack.push({
-				title: title,
-				titleBeforeMount: document.title,
-				count: 1,
-			});
-		} else {
-			activeTitlesStack[activeTitlesStack.length - 1].count++;
-		}
-	}
+  if (
+    activeTitlesStack.length &&
+    titleIndex >= 0 &&
+    activeTitlesStack[titleIndex].title !== title
+  ) {
+    removeTitleFromActiveTitles(titleIndex);
+    if (activeTitlesStack[activeTitlesStack.length - 1].title === title) {
+      activeTitlesStack[activeTitlesStack.length - 1].count++;
+    } else {
+      activeTitlesStack.push({
+        title: title,
+        titleBeforeMount: document.title,
+        count: 1,
+      });
+    }
+  } else {
+    if (
+      (activeTitlesStack.length &&
+        activeTitlesStack[activeTitlesStack.length - 1].title !== title) ||
+      !activeTitlesStack.length
+    ) {
+      activeTitlesStack.push({
+        title: title,
+        titleBeforeMount: document.title,
+        count: 1,
+      });
+    } else {
+      activeTitlesStack[activeTitlesStack.length - 1].count++;
+    }
+  }
 
-	return activeTitlesStack.length - 1;
+  return activeTitlesStack.length - 1;
 }
 
 export function useDOMTitle(title: string) {
-	const [titleIndex, setTitleIndex] = useState(-1);
+  const [titleIndex, setTitleIndex] = useState(-1);
+  const [firstRender, setFirstRender] = useState(true);
+  const mountedTitle = useRef<string>("");
 
-	const mountedTitle = useRef<string>("");
-	useEffect(() => {
-		const eventHandler = (e: activeTitlesStackUpdatedEvent) => {
-			if (e.detail && e.detail.decremented.includes(titleIndex))
-				setTitleIndex((oldIndex: number) => oldIndex - 1);
-		};
-		if (titleIndex >= 0)
-			document.addEventListener("activeTitlesStackUpdated", eventHandler);
+  const refreshTitle = useCallback(
+    (title: string) => {
+      let newTitle = mountedTitle.current;
 
-		return () => {
-			if (titleIndex >= 0) {
-				document.removeEventListener("activeTitlesStackUpdated", eventHandler);
+      if (
+        typeof title === "string" &&
+        title.trim().length > 0 &&
+        ((titleIndex >= 0 &&
+          title.trim() !== activeTitlesStack[titleIndex].title) ||
+          (titleIndex === -1 && mountedTitle.current !== title.trim()))
+      ) {
+        newTitle = title.trim();
 
-				if (
-					titleIndex < activeTitlesStack.length &&
-					activeTitlesStack[titleIndex].title === mountedTitle.current
-				) {
-					if (
-						activeTitlesStack[titleIndex].count <= 1 &&
-						document.title === activeTitlesStack[titleIndex].title
-					) {
-						document.title = activeTitlesStack[titleIndex].titleBeforeMount;
-					}
+        setTitleIndex(addTitleToActiveTitles(newTitle, titleIndex));
+        mountedTitle.current = newTitle;
 
-					removeTitleFromActiveTitles(titleIndex);
-				}
-			}
-		};
-	}, [titleIndex]);
+        document.title = newTitle;
+      } else if (
+        !title.trim() &&
+        titleIndex >= 0 &&
+        title.trim() !== mountedTitle.current
+      ) {
+        if (document.title === mountedTitle.current) {
+          document.title = activeTitlesStack[titleIndex].titleBeforeMount;
+        }
+        removeTitleFromActiveTitles(titleIndex);
+        setTitleIndex(-1);
+      }
+    },
+    [title, setTitleIndex]
+  );
 
-	useEffect(() => {
-		let newTitle = mountedTitle.current;
+  useEffect(() => {
+    const eventHandler = (e: activeTitlesStackUpdatedEvent) => {
+      if (e.detail && e.detail.decremented.includes(titleIndex))
+        setTitleIndex((oldIndex: number) => oldIndex - 1);
+    };
+    if (titleIndex >= 0)
+      document.addEventListener("activeTitlesStackUpdated", eventHandler);
 
-		if (
-			typeof title === "string" &&
-			title.trim().length > 0 &&
-			((titleIndex >= 0 &&
-				title.trim() !== activeTitlesStack[titleIndex].title) ||
-				(titleIndex === -1 && mountedTitle.current !== title.trim()))
-		) {
-			newTitle = title.trim();
+    return () => {
+      if (titleIndex >= 0) {
+        document.removeEventListener("activeTitlesStackUpdated", eventHandler);
 
-			setTitleIndex(addTitleToActiveTitles(newTitle, titleIndex));
-			mountedTitle.current = newTitle;
+        if (
+          titleIndex < activeTitlesStack.length &&
+          activeTitlesStack[titleIndex].title === mountedTitle.current
+        ) {
+          if (
+            activeTitlesStack[titleIndex].count <= 1 &&
+            document.title === activeTitlesStack[titleIndex].title
+          ) {
+            document.title = activeTitlesStack[titleIndex].titleBeforeMount;
+          }
 
-			document.title = newTitle;
-		} else if (
-			!title.trim() &&
-			titleIndex >= 0 &&
-			title.trim() !== mountedTitle.current
-		) {
-			if (document.title === mountedTitle.current) {
-				document.title = activeTitlesStack[titleIndex].titleBeforeMount;
-			}
-			removeTitleFromActiveTitles(titleIndex);
-			setTitleIndex(-1);
-		}
-	}, [title]);
+          removeTitleFromActiveTitles(titleIndex);
+        }
+      }
+    };
+  }, [titleIndex]);
+
+  useMemo(() => {
+    if (firstRender) {
+      refreshTitle(title);
+      setFirstRender(false);
+    }
+  }, [title]);
+
+  useEffect(() => {
+    if (!firstRender) {
+      refreshTitle(title);
+    }
+  }, [title]);
 }
 
 export default useDOMTitle;
