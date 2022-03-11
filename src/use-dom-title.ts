@@ -1,154 +1,192 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from "react";
+import { v4 as uuidv4 } from "uuid";
 
-// Metadata for active titles
-const activeTitlesStack: {
-  titleBeforeMount: string;
-  count: number;
+interface DOMTitleComponentData {
+  uuid: string;
   title: string;
-}[] = [];
-
-interface activeTitlesStackUpdated {
-  decremented: number[];
+  titleBeforeMount: string;
 }
 
-type activeTitlesStackUpdatedEvent = CustomEventInit<activeTitlesStackUpdated>;
-
-function removeTitleFromActiveTitles(titleIndex: number): number {
-  const { count, titleBeforeMount } = activeTitlesStack[titleIndex];
-  if (count > 1) {
-    activeTitlesStack[titleIndex].count -= 1;
-  } else {
-    // If our title is not the last in order, we pass our titleBeforeMount to the next title
-    if (titleIndex !== activeTitlesStack.length - 1)
-      activeTitlesStack[titleIndex + 1].titleBeforeMount = titleBeforeMount;
-
-    activeTitlesStack.splice(titleIndex, 1);
-    const activeTitlesStackUpdated = new CustomEvent<activeTitlesStackUpdated>(
-      "activeTitlesStackUpdated",
-      {
-        detail: {
-          decremented: [...Array(activeTitlesStack.length + 1).keys()].filter(
-            (index: number) => index > titleIndex
-          ),
-        },
-      }
-    );
-    document.dispatchEvent(activeTitlesStackUpdated);
-  }
-  return -1;
+interface DOMTitleRegisterEventData extends DOMTitleComponentData {
+  myRef: MutableRefObject<DOMTitleComponentData | undefined>;
 }
 
-function addTitleToActiveTitles(title: string, titleIndex: number): number {
-  if (
-    activeTitlesStack.length &&
-    titleIndex >= 0 &&
-    activeTitlesStack[titleIndex].title !== title
-  ) {
-    removeTitleFromActiveTitles(titleIndex);
-    if (activeTitlesStack[activeTitlesStack.length - 1].title === title) {
-      activeTitlesStack[activeTitlesStack.length - 1].count++;
-    } else {
-      activeTitlesStack.push({
-        title: title,
-        titleBeforeMount: document.title,
-        count: 1,
-      });
-    }
-  } else {
-    if (
-      (activeTitlesStack.length &&
-        activeTitlesStack[activeTitlesStack.length - 1].title !== title) ||
-      !activeTitlesStack.length
-    ) {
-      activeTitlesStack.push({
-        title: title,
-        titleBeforeMount: document.title,
-        count: 1,
-      });
-    } else {
-      activeTitlesStack[activeTitlesStack.length - 1].count++;
-    }
-  }
+type DOMTitleRegisterEventDetail = CustomEventInit<DOMTitleRegisterEventData>;
 
-  return activeTitlesStack.length - 1;
+interface DOMTitleUnregisterEventData extends DOMTitleComponentData {
+  beforeMe?: DOMTitleComponentData;
+  behindMe?: DOMTitleComponentData;
 }
+
+type DOMTitleUnregisterEventDetail =
+  CustomEventInit<DOMTitleUnregisterEventData>;
+
+function checkIfSameUUID<T extends DOMTitleComponentData>(
+  a?: T,
+  b?: T
+): boolean {
+  return !!a && !!b && a.uuid === b.uuid;
+}
+
+const registerDOMTitle = "registerDOMTitle";
+const unregisterDOMTitle = "unregisterDOMTitle";
+
+let uuidStore: string[] = [];
 
 export function useDOMTitle(title: string) {
-  const [titleIndex, setTitleIndex] = useState(-1);
-  const [firstRender, setFirstRender] = useState(true);
-  const mountedTitle = useRef<string>("");
+  const uuid = useRef(uuidv4());
+  const mountedTitle = useRef("");
+  const titleBeforeMount = useRef("");
+  const behindMe = useRef<DOMTitleComponentData>();
+  const beforeMe = useRef<DOMTitleComponentData>();
+  const iAmLast = useRef(true);
 
-  const refreshTitle = useCallback(
-    (title: string) => {
-      let newTitle = mountedTitle.current;
+  const newUnregisterEvent = useCallback(
+    () =>
+      new CustomEvent<DOMTitleUnregisterEventData>(unregisterDOMTitle, {
+        detail: {
+          beforeMe: beforeMe.current,
+          behindMe: behindMe.current,
+          uuid: uuid.current,
+          title: mountedTitle.current,
+          titleBeforeMount: titleBeforeMount.current,
+        },
+      }),
+    []
+  );
 
-      if (
-        typeof title === "string" &&
-        title.trim().length > 0 &&
-        ((titleIndex >= 0 &&
-          title.trim() !== activeTitlesStack[titleIndex].title) ||
-          (titleIndex === -1 && mountedTitle.current !== title.trim()))
-      ) {
-        newTitle = title.trim();
+  const revertTitle = useCallback(() => {
+    if (
+      document.title === mountedTitle.current &&
+      (!beforeMe.current ||
+        (beforeMe.current &&
+          beforeMe.current.title !== mountedTitle.current)) &&
+      (!behindMe.current ||
+        (behindMe.current && behindMe.current.title !== mountedTitle.current))
+    )
+      document.title = titleBeforeMount.current;
+  }, []);
 
-        setTitleIndex(addTitleToActiveTitles(newTitle, titleIndex));
-        mountedTitle.current = newTitle;
+  const register = useCallback((title: string) => {
+    if (typeof title === "string") {
+      const trimmed = title.trim();
 
-        document.title = newTitle;
-      } else if (
-        !title.trim() &&
-        titleIndex >= 0 &&
-        title.trim() !== mountedTitle.current
-      ) {
-        if (document.title === mountedTitle.current) {
-          document.title = activeTitlesStack[titleIndex].titleBeforeMount;
-        }
-        removeTitleFromActiveTitles(titleIndex);
-        setTitleIndex(-1);
+      let registerAllowed =
+        mountedTitle.current && !uuidStore.includes(uuid.current);
+
+      if (!trimmed || (trimmed && mountedTitle.current !== trimmed)) {
+        document.dispatchEvent(newUnregisterEvent());
+        revertTitle();
+
         mountedTitle.current = "";
+
+        titleBeforeMount.current = "";
+        behindMe.current = undefined;
+        beforeMe.current = undefined;
+        iAmLast.current = true;
+        if (trimmed) registerAllowed = true;
+        uuidStore = uuidStore.filter((val: string) => val !== uuid.current);
       }
-    },
-    [title, setTitleIndex]
+
+      if (trimmed && mountedTitle.current !== trimmed && registerAllowed) {
+        titleBeforeMount.current = document.title;
+
+        mountedTitle.current = trimmed;
+
+        document.title = trimmed;
+        if (!uuidStore.includes(uuid.current)) {
+          uuidStore.push(uuid.current);
+
+          const registerEvent = new CustomEvent<DOMTitleRegisterEventData>(
+            registerDOMTitle,
+            {
+              detail: {
+                uuid: uuid.current,
+                titleBeforeMount: titleBeforeMount.current,
+                title: mountedTitle.current,
+                myRef: beforeMe,
+              },
+            }
+          );
+          document.dispatchEvent(registerEvent);
+        }
+      }
+    }
+  }, []);
+
+  const isMe = useCallback(
+    (other?: DOMTitleComponentData) =>
+      mountedTitle.current &&
+      uuid.current &&
+      checkIfSameUUID(
+        {
+          title: mountedTitle.current,
+          uuid: uuid.current,
+          titleBeforeMount: titleBeforeMount.current,
+        },
+        other
+      ),
+
+    []
   );
 
   useEffect(() => {
-    const eventHandler = (e: activeTitlesStackUpdatedEvent) => {
-      if (e.detail && e.detail.decremented.includes(titleIndex))
-        setTitleIndex((oldIndex: number) => oldIndex - 1);
+    const handleRegister = (e: DOMTitleRegisterEventDetail) => {
+      if (iAmLast.current && e.detail && e.detail.uuid !== uuid.current) {
+        iAmLast.current = false;
+        behindMe.current = e.detail;
+
+        e.detail.myRef.current = {
+          uuid: uuid.current,
+          title: mountedTitle.current,
+          titleBeforeMount: titleBeforeMount.current,
+        };
+      }
     };
-    if (titleIndex >= 0)
-      document.addEventListener("activeTitlesStackUpdated", eventHandler);
 
-    return () => {
-      if (titleIndex >= 0) {
-        document.removeEventListener("activeTitlesStackUpdated", eventHandler);
-
+    const handleUnregister = (e: DOMTitleUnregisterEventDetail) => {
+      if (e.detail && e.detail.uuid !== uuid.current) {
         if (
-          titleIndex < activeTitlesStack.length &&
-          activeTitlesStack[titleIndex].title === mountedTitle.current
+          isMe(e.detail.beforeMe) &&
+          checkIfSameUUID(behindMe.current, e.detail)
         ) {
-          if (
-            activeTitlesStack[titleIndex].count <= 1 &&
-            document.title === activeTitlesStack[titleIndex].title
-          ) {
-            document.title = activeTitlesStack[titleIndex].titleBeforeMount;
-          }
-
-          removeTitleFromActiveTitles(titleIndex);
+          behindMe.current = e.detail.behindMe;
+          if (!behindMe.current) iAmLast.current = true;
+        } else if (
+          isMe(e.detail.behindMe) &&
+          checkIfSameUUID(beforeMe.current, e.detail)
+        ) {
+          beforeMe.current = e.detail.beforeMe;
+          titleBeforeMount.current = e.detail.titleBeforeMount;
         }
       }
     };
-  }, [titleIndex]);
+
+    document.addEventListener(registerDOMTitle, handleRegister);
+    document.addEventListener(unregisterDOMTitle, handleUnregister);
+    return () => {
+      document.removeEventListener(registerDOMTitle, handleRegister);
+      document.removeEventListener(unregisterDOMTitle, handleUnregister);
+
+      revertTitle();
+
+      document.dispatchEvent(newUnregisterEvent());
+      uuidStore = uuidStore.filter((val: string) => val !== uuid.current);
+    };
+  }, []);
 
   useMemo(() => {
-    refreshTitle(title);
-    setFirstRender(false);
+    register(title);
   }, []);
 
   useEffect(() => {
-    if (!firstRender) {
-      refreshTitle(title);
-    }
+    register(title);
   }, [title]);
 }
 
