@@ -19,7 +19,7 @@ jobs:
       - name: Install Yarn
         run: npm i -g yarn
       - name: Build
-        run: cd demo && yarn run build
+        run: cd demo && yarn && yarn run build && touch build/.nojekyll
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
