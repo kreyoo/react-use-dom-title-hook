@@ -146,4 +146,16 @@ describe("use-dom-title", () => {
     renderResult2.unmount();
     expect(document.title).toBe("unmounted");
   });
+
+  it("does not revert the title if there is another title on top of the stack", () => {
+    document.title = "unmounted";
+    const renderResult = renderHook(() => useDOMTitle("Loading"));
+    expect(document.title).toBe("Loading");
+    renderHook(() => useDOMTitle("Mounted"));
+    expect(document.title).toBe("Mounted");
+    renderHook(() => useDOMTitle("Loading"));
+    expect(document.title).toBe("Loading");
+    renderResult.unmount();
+    expect(document.title).toBe("Loading");
+  });
 });

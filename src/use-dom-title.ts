@@ -67,8 +67,7 @@ export function useDOMTitle(title: string) {
       (!beforeMe.current ||
         (beforeMe.current &&
           beforeMe.current.title !== mountedTitle.current)) &&
-      (!behindMe.current ||
-        (behindMe.current && behindMe.current.title !== mountedTitle.current))
+      !behindMe.current
     )
       document.title = titleBeforeMount.current;
   }, []);
