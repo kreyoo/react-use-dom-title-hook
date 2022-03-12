@@ -18,7 +18,7 @@ The hook adheres to the following rules:
 
 ## Demo
 
-Coming soon...
+You can find a demo [here](https://kreyoo.github.io/react-use-dom-title-hook)
 
 ## Code example
 

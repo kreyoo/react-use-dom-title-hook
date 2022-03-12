@@ -29,5 +29,6 @@
   ],
   "scripts": {
     "prepublish": "tsc"
-  }
+  },
+  "homepage": "https://kreyoo.github.io/react-use-dom-title-hook"
 }
