@@ -12,5 +12,5 @@
     "**/Thumbs.db": true,
     "**/node_modules": true
   },
-  "cSpell.words": ["mantine", "Vollmer", "Xicon"]
+  "cSpell.words": ["mantine", "uuidv", "Vollmer", "Xicon"]
 }
