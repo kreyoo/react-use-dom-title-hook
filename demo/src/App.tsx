@@ -1,6 +1,6 @@
 import { Center, Container, ScrollArea, SimpleGrid } from "@mantine/core";
 import React from "react";
-import useDOMTitle from "../../src/use-dom-title";
+import useDOMTitle from "react-use-dom-title-hook";
 import "./index.css";
 import Playground from "./Playground";
 import ScheduledComponent from "./ScheduledComponent";

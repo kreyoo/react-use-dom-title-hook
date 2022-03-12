@@ -1,8 +1,8 @@
 import { Button, Center, Paper, SimpleGrid, Text, Title } from "@mantine/core";
 import { Prism } from "@mantine/prism";
 import React, { useEffect, useState } from "react";
+import useDOMTitle from "react-use-dom-title-hook";
 import { CircleCheck, CircleX } from "tabler-icons-react";
-import useDOMTitle from "../../src/use-dom-title";
 export default function TitleComponent(props: {
   title: string;
   active?: boolean;
