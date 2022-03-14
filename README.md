@@ -16,6 +16,10 @@ The hook adheres to the following rules:
 - When multiple components with the same title get mounted in a row, the title only gets removed when all components have unmounted
 - When three components get mounted with a title and the second in order unmounts, the title of the first component is secured and loaded when the third component unmounts. Of course this mechanism works with any count of titled components.
 
+## Installation
+
+`npm i react-use-dom-title-hook` or `yarn add react-use-dom-title-hook`
+
 ## Demo
 
 You can find a demo [here](https://kreyoo.github.io/react-use-dom-title-hook)
