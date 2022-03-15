@@ -1341,9 +1341,9 @@ supports-preserve-symlinks-flag@^1.0.0:
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
 tabler-icons-react@^1.37.0:
-  version "1.37.0"
-  resolved "https://registry.yarnpkg.com/tabler-icons-react/-/tabler-icons-react-1.37.0.tgz#a01745450f1081341d14e7ebab3f6813bfc7ae93"
-  integrity sha512-KooAxxQ55z3P5//T1YrowuFDMtGgUJNVkqwVqsIOSMrUJA9hbteUcMFSedsHChzZrctdGq7/yRhfm13uaWK5Ow==
+  version "1.38.0"
+  resolved "https://registry.yarnpkg.com/tabler-icons-react/-/tabler-icons-react-1.38.0.tgz#4e0482ec36e8cf6aae38d5b4a1a5cbebfddce6c4"
+  integrity sha512-lHPKAT2stog59iOlc42UqKa43anCj5jaEM9OhUYDGnHA4tljfsiHzIcPM2UcYNu5hvk2teN1Mx5+8Pz7JgWPCw==
 
 to-fast-properties@^2.0.0:
   version "2.0.0"
