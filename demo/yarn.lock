@@ -366,11 +366,11 @@
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
 "@mantine/core@^4.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-4.1.0.tgz#282b0010c2636c42fea4ae2b9d507df17770cfd4"
-  integrity sha512-uEHGssKveDgGHhbBrgVqp8o12m0oQGLBKH3D8bkrca1GB905ZHuj8CG+i/ojBhqdalfUwqcYGRpwwALtD+XfJg==
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-4.1.1.tgz#0c0329227330f0836d38d46e65e21f391c5bbb66"
+  integrity sha512-7eTv/vXKX863ri3c6zVbxozsAeA8B0iN31j3/dKs0K3y5Vd9+cgAy59WQk2RBGRlWdln7gtLnELePyQz+WlXLQ==
   dependencies:
-    "@mantine/styles" "4.1.0"
+    "@mantine/styles" "4.1.1"
     "@popperjs/core" "^2.9.3"
     "@radix-ui/react-scroll-area" "^0.1.1"
     clsx "^1.1.1"
@@ -390,10 +390,10 @@
     clsx "^1.1.1"
     prism-react-renderer "^1.2.1"
 
-"@mantine/styles@4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-4.1.0.tgz#b911b4a49e07ff5e34877f347e64923f7198c480"
-  integrity sha512-mWFNSE5DqE/5C9TDYIkQVbTef8QyWnW8a8MADHl6S52K0iGU8nqw4jnyozB+6y9JEIxdl+sp0o16L2JnAsq7bA==
+"@mantine/styles@4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-4.1.1.tgz#c8fc9d62ffb3a842ed5210e8abc2b4c3ec4b2ad4"
+  integrity sha512-ZTfjqugTrqAQatgmdA0R+smUCIwPZCHykxKA5HwQzuJZh6/9TwaPozdTP7yOKAVyjBDnnAQda2PPZ1Gz1PrXqg==
   dependencies:
     "@emotion/cache" "^11.7.1"
     "@emotion/react" "^11.7.1"
