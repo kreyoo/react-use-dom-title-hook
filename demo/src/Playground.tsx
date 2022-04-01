@@ -14,8 +14,8 @@ export default function Playground() {
   const [newTitle, setNewTitle] = useState("");
   return (
     <div style={{ marginTop: 50 }}>
-      <Title>Playground</Title>
-      <Paper withBorder padding="xl">
+      <Paper withBorder style={{ padding: 15 }}>
+        <Title>Playground</Title>
         <Center>
           <SimpleGrid cols={5 > titles.length ? titles.length : 5}>
             {titles.map((title: string, index: number) => (

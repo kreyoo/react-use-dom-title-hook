@@ -100,9 +100,9 @@ function TitleButtonComponent(props: { title: string }) {
 	`;
   return (
     <div style={{ marginTop: 50 }}>
-      <Title>Simple Title Component</Title>
-      <Paper withBorder padding="xl">
-        <Text>
+      <Paper withBorder style={{ padding: 10 }}>
+        <Title>Simple Title Component</Title>
+        <Text style={{ marginTop: 10 }}>
           The next examples will be shown with the following component:
         </Text>
         <TitleComponent title="My title" />

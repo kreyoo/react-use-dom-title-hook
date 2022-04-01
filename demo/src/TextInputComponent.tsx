@@ -29,9 +29,10 @@ function TextInputComponent() {
 
   return (
     <div style={{ marginTop: 50 }}>
-      <Title>Type a value</Title>
-      <Paper withBorder padding="xl">
+      <Paper withBorder style={{ padding: 10 }}>
+        <Title color="light">Type a value</Title>
         <TextInput
+          style={{ marginTop: 10 }}
           value={value}
           onChange={(e) => {
             setValue(e.currentTarget.value);

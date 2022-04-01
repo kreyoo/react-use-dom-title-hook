@@ -39,8 +39,8 @@ export default function ScheduledComponent(props: {
 
   return (
     <div style={{ marginTop: 50 }}>
-      <Title>{props.title}</Title>
-      <Paper withBorder padding="xl">
+      <Paper withBorder style={{ padding: 10 }}>
+        <Title>{props.title}</Title>
         <Center>
           <SimpleGrid cols={5 > props.titles.length ? props.titles.length : 5}>
             {props.titles.map((title: string, index: number) => (

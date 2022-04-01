@@ -35,7 +35,7 @@ export default function DemoApp() {
             <ScheduledComponent
               title="But they only group when mounted right after each other"
               titles={["1st title", "Loading...", "2nd title", "Loading..."]}
-              schedule={[0, 1, 2, 3, 1, 3, 2, 0]}
+              schedule={[0, 1, 2, 3, 3, 2, 1, 0]}
             />
             <Playground />
             <div style={{ minHeight: "5vh" }} />
