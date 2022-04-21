@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react";
 import useDOMTitle from "./use-dom-title";
 
 describe("use-dom-title", () => {
