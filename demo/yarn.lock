@@ -1118,7 +1118,7 @@ node-releases@^2.0.2:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.2.tgz#7139fe71e2f4f11b47d4d2986aaf8c48699e0c01"
   integrity sha512-XxYDdcQ6eKqp/YjI+tb2C5WM2LgjnZrfYg4vgQt49EK268b6gYCHsBLrK2qvJo4FmCtqmKezb0WZFK4fkrZNsg==
 
-object-assign@^4.0.1, object-assign@^4.1.1:
+object-assign@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
   integrity sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
@@ -1275,22 +1275,14 @@ react-textarea-autosize@^8.3.2:
     use-latest "^1.0.0"
 
 react-use-dom-title-hook@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-use-dom-title-hook/-/react-use-dom-title-hook-1.1.0.tgz#85975c9fc4149a04d59a914cffd8e1a2dabeee6b"
-  integrity sha512-b8sOqKOspqsVbKn0/t6t796mJ19HgxubHj87dLDV5p0fBr6zrjz5Oyj09iKBVKLftb2Us8/dt/Z6yFR2hVTuCQ==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-use-dom-title-hook/-/react-use-dom-title-hook-1.1.1.tgz#76054250cf2b203eab22a7f9a094f60fe4a37986"
+  integrity sha512-5s4cPiQid7e422zntZYo2jL9nBJbiUdnYRXBAqLoxBFtF2g72+IFsGJvnkP8mkX41n5a8u5w6gKtU9bt2pvKtg==
   dependencies:
     react ">=16.8"
     uuid "^8.3.2"
 
-react@>=16.8:
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
-  integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-
-react@^18.0.0:
+react@>=16.8, react@^18.0.0:
   version "18.0.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.0.0.tgz#b468736d1f4a5891f38585ba8e8fb29f91c3cb96"
   integrity sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A==
