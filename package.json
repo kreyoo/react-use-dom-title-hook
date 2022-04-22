@@ -33,5 +33,5 @@
   "scripts": {
     "prepublish": "tsc"
   },
-  "homepage": "jvllmr.github.io/react-use-dom-title-hook
+  "homepage": "https://jvllmr.github.io/react-use-dom-title-hook"
 }
