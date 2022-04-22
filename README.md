@@ -22,7 +22,7 @@ The hook adheres to the following rules:
 
 ## Demo
 
-You can find a demo [here](https://kreyoo.github.io/react-use-dom-title-hook)
+You can find a demo [here](https://jvllmr.github.io/react-use-dom-title-hook)
 
 ## Code example
 
