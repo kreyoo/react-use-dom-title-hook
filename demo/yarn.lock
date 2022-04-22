@@ -377,14 +377,14 @@
     react-textarea-autosize "^8.3.2"
 
 "@mantine/hooks@^4.0":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-4.1.2.tgz#7d9af7e505bdfb017a37181ed4061fa66e37cbae"
-  integrity sha512-ccTD4q7jViYisizjydRkCZdiMrtbC+uxEsZHHjyy/adcK8zOix178bag53OKn5TIFFMH6dXHZmto0IZsVCY1vw==
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-4.1.4.tgz#c293a84f66218606caabf28db13299b5dc504605"
+  integrity sha512-1pcajF7gaSY0sUp9klqt7Y/gPIfTnHamkuefd8UctHMNBP25QdValAT1XGYfmHKIXeljZi7ow6O6dhsK9C8X2A==
 
 "@mantine/prism@^4.0":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@mantine/prism/-/prism-4.1.2.tgz#4add6e795c874b0af09be2568bffa1350540e3d2"
-  integrity sha512-QgfkvgfYpBdcA0InsPu+MeN8DrnOEr4QZ4qRb95S2CS7V9qkE6sNOxh22HRaMItLtgPp+X6hETunScApUAQUIA==
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/@mantine/prism/-/prism-4.1.4.tgz#2aeb092561237f2bc19639f7a9d032e1c2e95dcc"
+  integrity sha512-JMHLHESbP6H+7xpYxbVawcTauZRCIPYnIVwinUVJCpq+FnkMumZv0TTRcLjhgs5IjHTUDr5/DCvlQBYuVwxIhw==
   dependencies:
     prism-react-renderer "^1.2.1"
 
@@ -1358,9 +1358,9 @@ supports-preserve-symlinks-flag@^1.0.0:
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
 tabler-icons-react@^1.37.0:
-  version "1.43.0"
-  resolved "https://registry.yarnpkg.com/tabler-icons-react/-/tabler-icons-react-1.43.0.tgz#aefe858c7525be89539a8bfc75fe001af01483c8"
-  integrity sha512-xGrM/H5zurThI5zjt4dNveQaj7B/5tmV/akBvV7wAhqsFjnc7Ryi9IQ+rXXAFKC7YvJM8dUFXRi+rEQ41gaW0w==
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/tabler-icons-react/-/tabler-icons-react-1.46.0.tgz#957215030bd5ce0ce2d2a93ed5e52b85f5ff95f7"
+  integrity sha512-tQt686DPfGRXxdCMg63gEO7KP1mcmx0JvzgAq5HKkD3ts9HSL9AAaGAGpa/IJdD0tLaoviegdpv6MOp8DsAr9Q==
 
 to-fast-properties@^2.0.0:
   version "2.0.0"
