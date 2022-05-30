@@ -444,9 +444,9 @@
   integrity sha512-SEdnh/ugmYL819ssPK0pRNZO+/gq709BwxfzhA2x7QsdQBlcrXU0vrrckhnScTG/iqlVxNDi36Yhl31JIBmd/Q==
 
 "@mantine/prism@^4.0":
-  version "4.2.6"
-  resolved "https://registry.yarnpkg.com/@mantine/prism/-/prism-4.2.6.tgz#498d30ca23ab857d1af8365f63f76086d6d94fca"
-  integrity sha512-oGvvyHJBw/AsdY00gEfGYlZsD0/XrSY6LZ7U2B8/knl2OVF5UgRxJvn9DuBRA4V57cSlwbXHOxSW/FL8ioL2mg==
+  version "4.2.7"
+  resolved "https://registry.yarnpkg.com/@mantine/prism/-/prism-4.2.7.tgz#d104d32f88f799d5183c78d75065561dab9ed47c"
+  integrity sha512-QIsqnqKSUV5a/8XRSqHixjAVfpZX1PDfQvEfDUL9cO1/aXejtAZJ2zyvU3+LH1YVjWdDFGNK+oCrNVBZ1ST3NA==
   dependencies:
     prism-react-renderer "^1.2.1"
 
