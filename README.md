@@ -1,7 +1,7 @@
 # react-use-dom-title
 
 ![Routine Checks](https://github.com/kreyoo/react-use-dom-title-hook/actions/workflows/test.yml/badge.svg)
-![Codecov](https://img.shields.io/codecov/c/gh/kreyoo/react-use-dom-title-hook?style=plastic)
+![Codecov](https://img.shields.io/codecov/c/github/jvllmr/react-use-dom-title-hook?style=plastic)
 ![npm](https://img.shields.io/npm/dm/react-use-dom-title-hook?style=plastic)
 
 A react hook for handling DOM titles in nested components.
