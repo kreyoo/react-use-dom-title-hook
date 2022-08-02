@@ -9,7 +9,7 @@
     "deploy": "yarn run build && touch build/.nojekyll && gh-pages -t -d build"
   },
   "dependencies": {
-    "@mantine/core": "^4.0",
+    "@mantine/core": "^4.0 || ^5.0.0",
     "@mantine/hooks": "^4.0",
     "@mantine/prism": "^4.0",
     "react": "^18.0.0",
