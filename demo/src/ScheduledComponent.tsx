@@ -39,7 +39,7 @@ export default function ScheduledComponent(props: {
 
   return (
     <div style={{ marginTop: 50 }}>
-      <Paper withBorder style={{ padding: 10 }}>
+      <Paper withBorder p="xs">
         <Title>{props.title}</Title>
         <Center>
           <SimpleGrid cols={5 > props.titles.length ? props.titles.length : 5}>

@@ -14,7 +14,6 @@ function Index() {
       black: "#1a1b1e",
     },
   };
-  console.log(colorScheme);
   return <MantineProvider {...mantineProviderProps} />;
 }
 
