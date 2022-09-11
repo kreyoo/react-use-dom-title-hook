@@ -1,7 +1,7 @@
 import { Paper, TextInput, Title } from "@mantine/core";
 import { useDebouncedValue } from "@mantine/hooks";
 import { Prism } from "@mantine/prism";
-import React, { useState } from "react";
+import { useState } from "react";
 import useDOMTitle from "react-use-dom-title-hook";
 export default function TextInputComponent() {
   const [value, setValue] = useState("");

@@ -7,7 +7,7 @@ import {
   TextInput,
   Title,
 } from "@mantine/core";
-import React, { useState } from "react";
+import { useState } from "react";
 import { TitleButtonComponent } from "./TitleComponent";
 export default function Playground() {
   const [titles, setTitles] = useState<string[]>([]);

@@ -1,5 +1,5 @@
 import { Button, Center, Paper, SimpleGrid, Title } from "@mantine/core";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import TitleComponent from "./TitleComponent";
 export default function ScheduledComponent(props: {
   titles: string[];
