@@ -430,13 +430,13 @@
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
 "@mantine/core@^4.0 || ^5.0.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-5.3.0.tgz#32d3784ef1febf1592603aaefec4f7ecc251be26"
-  integrity sha512-8Nj/Ruwi6pCZgG/A0ZM9sfIeQLhYQKjpM5XPyOinsw+BHzBeSA8WtGYve3DBXWYSKOOArrjt8yZAz4YTAAM+WA==
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-5.3.1.tgz#6213d465bfd956f2695c64420b4185fa8bb5cb79"
+  integrity sha512-wK46MDk9YBPjNAd5Cpz54qmKZ7/SVz8s4cZ6rsH4Wk9zEe+XiX5U8V5ToY32ksuwFzlG80uErBNXKDxzseVENg==
   dependencies:
     "@floating-ui/react-dom-interactions" "0.6.6"
-    "@mantine/styles" "5.3.0"
-    "@mantine/utils" "5.3.0"
+    "@mantine/styles" "5.3.1"
+    "@mantine/utils" "5.3.1"
     "@radix-ui/react-scroll-area" "1.0.0"
     react-textarea-autosize "8.3.4"
 
@@ -453,10 +453,10 @@
     "@mantine/utils" "5.3.0"
     prism-react-renderer "^1.2.1"
 
-"@mantine/styles@5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-5.3.0.tgz#aea9810eab6b71c6ebe5189bafc47c051dd89f77"
-  integrity sha512-2JQ7m4XHq8sOeSQsrHenW6xK6vRQ+gdfObEZbFx15NsWiIUFKWi+7nzVlLGRjDzYa7rA75ZZ3AbnuYBbSp5hjA==
+"@mantine/styles@5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-5.3.1.tgz#4e4949d2a979fae9bca1832a79171c1b4e74ac7e"
+  integrity sha512-zjQOCJK46tW6gaT3Uoo946blaRLlFfuQaQh9hRBY2e03HKqG2T8h1vfrOzqNb14MuqbpZaqgFFqOzh7LfzNg8w==
   dependencies:
     clsx "1.1.1"
     csstype "3.0.9"
@@ -465,6 +465,11 @@
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-5.3.0.tgz#cb57643500819354ede198151a2a072375e9e122"
   integrity sha512-On89C5CRTghwaaEwGXqjY5FZ/VYNoBllbBoDl2hb7l4pxLakpY9eAQeuOOJdPb3bBiBoD/e29tCkG+UcVYfr4w==
+
+"@mantine/utils@5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-5.3.1.tgz#4bf772535f47a1cdc1e6c007df517ccf191ab68c"
+  integrity sha512-2LnmoiPn+0Wp7B0FpWZxf3V4N5kp8+ISAJg+prQQCBtE0hSiDDuoFoGw621epDp7WkA5bYNeyjEnH3+fnveFgw==
 
 "@radix-ui/number@1.0.0":
   version "1.0.0"
