@@ -15,11 +15,9 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
-      - name: Install Yarn
-        run: npm i -g yarn
+          node-version: 18
       - name: Build
-        run: cd demo && yarn && yarn run build && touch build/.nojekyll
+        run: cd demo && npm i && npm run build && touch build/.nojekyll
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

@@ -32,7 +32,9 @@
     "lib/**/*"
   ],
   "scripts": {
-    "prepublish": "tsc"
+    "prepublish": "tsc",
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "homepage": "https://jvllmr.github.io/react-use-dom-title-hook"
 }

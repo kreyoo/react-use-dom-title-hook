@@ -17,7 +17,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-use-dom-title-hook": "^1.1.0",
-    "tabler-icons-react": "^1.37.0"
+    "@tabler/icons-react": "^2.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.33 || ^18.0.0",

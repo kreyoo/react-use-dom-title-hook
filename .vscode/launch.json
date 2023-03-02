@@ -23,7 +23,7 @@
       "name": "Demo Site",
       "request": "launch",
       "cwd": "${workspaceFolder}/demo",
-      "command": "yarn dev"
+      "command": "npm run dev"
     }
   ]
 }
