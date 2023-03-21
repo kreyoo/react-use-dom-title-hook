@@ -6,11 +6,11 @@ import {
   SimpleGrid,
 } from "@mantine/core";
 import useDOMTitle from "react-use-dom-title-hook";
-import "./index.css";
 import Playground from "./Playground";
 import ScheduledComponent from "./ScheduledComponent";
 import TextInputComponent from "./TextInputComponent";
 import { TitleComponentExample } from "./TitleComponent";
+import "./index.css";
 export default function DemoApp() {
   useDOMTitle("Demo for react-use-dom-title-hook");
 
