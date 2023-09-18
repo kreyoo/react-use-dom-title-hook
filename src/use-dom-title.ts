@@ -29,7 +29,7 @@ type DOMTitleUnregisterEventDetail =
 
 function checkIfSameUUID<T extends DOMTitleComponentData>(
   a?: T,
-  b?: T
+  b?: T,
 ): boolean {
   return !!a && !!b && a.uuid === b.uuid;
 }
@@ -58,7 +58,7 @@ export function useDOMTitle(title: string) {
           titleBeforeMount: titleBeforeMount.current,
         },
       }),
-    []
+    [],
   );
 
   const revertTitle = useCallback(() => {
@@ -111,7 +111,7 @@ export function useDOMTitle(title: string) {
                 title: mountedTitle.current,
                 myRef: beforeMe,
               },
-            }
+            },
           );
           document.dispatchEvent(registerEvent);
         }
@@ -129,10 +129,10 @@ export function useDOMTitle(title: string) {
           uuid: uuid.current,
           titleBeforeMount: titleBeforeMount.current,
         },
-        other
+        other,
       ),
 
-    []
+    [],
   );
 
   useEffect(() => {
