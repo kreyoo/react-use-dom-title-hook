@@ -1,5 +1,7 @@
 # react-use-dom-title
 
+_**Warning:** Project moved to https://github.com/jvllmr/component-titles._
+
 ![Routine Checks](https://github.com/kreyoo/react-use-dom-title-hook/actions/workflows/test.yml/badge.svg)
 ![Codecov](https://img.shields.io/codecov/c/github/jvllmr/react-use-dom-title-hook?style=plastic)
 ![npm](https://img.shields.io/npm/dm/react-use-dom-title-hook?style=plastic)
